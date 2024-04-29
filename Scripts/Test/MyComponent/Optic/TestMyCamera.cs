@@ -1,0 +1,34 @@
+using System.IO;
+using System;
+using UnityEngine;
+
+using MyComponent.Optic;
+using Setting.Optic;
+
+namespace Test
+{
+    public class TestMyCamera : MonoBehaviour
+    {
+        // Member
+        private static string _fileName = "data.json";
+        private static string _camDrectory = "E:\\WORKSPACE\\UnityProjects\\MyTest\\AppData\\Setting\\Optic\\Camera";
+        private static string _camName = "CaptureCamera";
+
+
+        // Public Method
+        public static void Load()
+        {
+            MyCamera camera = GameObject.Find(_camName).GetComponent<MyCamera>();
+
+            string camPath = Path.Combine(_camDrectory, _fileName);
+            string camJson;
+            using (StreamReader sr = new StreamReader(camPath))
+            {
+                camJson = sr.ReadToEnd();
+            }
+            CameraSetting cam = JsonUtility.FromJson<CameraSetting>(camJson);
+            camera.LoadSetting(cam);
+        }
+    }
+}
+
