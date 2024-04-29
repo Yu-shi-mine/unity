@@ -50,6 +50,7 @@ namespace Setting.Optic
         public float PixWidth;
         public float PixHeight;
 
+
         // Constructor
         public CMOSSetting(string path, int width, int height, float pixWidth, float pixHeight) : base(path)
         {

@@ -12,7 +12,7 @@ namespace Test
         // Member
         private static string _fileName = "data.json";
 
-        private static string _camDrectory = "E:\\WORKSPACE\\UnityProjects\\MyTest\\AppData\\Setting\\Optic\\Camera";
+        private static string _camDirectory = "E:\\WORKSPACE\\UnityProjects\\MyTest\\AppData\\Setting\\Optic\\Camera";
         private static float _workDistance = 650f;
         
         private static string _cmosDirectory = "E:\\WORKSPACE\\UnityProjects\\MyTest\\AppData\\Setting\\Optic\\CMOS";
@@ -50,7 +50,7 @@ namespace Test
             JsonIO.Save(lensJson, lensPath);
 
             //Cameraê›íË
-            string camPath = Path.Combine(_camDrectory, _fileName);
+            string camPath = Path.Combine(_camDirectory, _fileName);
             CameraSetting camSetting = new CameraSetting(camPath, cmosSetting, lensSetting, _workDistance);
             string camJson = JsonUtility.ToJson(camSetting, true);
             JsonIO.Save(camJson, camPath);
@@ -60,29 +60,17 @@ namespace Test
         {
             // CMOSê›íË
             string cmosPath = Path.Combine(_cmosDirectory, _fileName);
-            string cmosJson;
-            using (StreamReader sr = new StreamReader(cmosPath))
-            {
-                cmosJson = sr.ReadToEnd();
-            }
+            string cmosJson = JsonIO.Load(cmosPath);
             CMOSSetting cmos = JsonUtility.FromJson<CMOSSetting>(cmosJson);
 
             // Lensê›íË
             string lensPath = Path.Combine(_lensDirectory, _fileName);
-            string lensJson;
-            using (StreamReader sr = new StreamReader(lensPath))
-            {
-                lensJson = sr.ReadToEnd();
-            }
+            string lensJson = JsonIO.Load(lensPath);
             LensSetting lens = JsonUtility.FromJson<LensSetting>(lensJson);
 
             // ÉJÉÅÉâê›íË
-            string camPath = Path.Combine(_camDrectory, _fileName);
-            string camJson;
-            using (StreamReader sr = new StreamReader(camPath))
-            {
-                camJson = sr.ReadToEnd();
-            }
+            string camPath = Path.Combine(_camDirectory, _fileName);
+            string camJson = JsonIO.Load(camPath);
             CameraSetting cam = JsonUtility.FromJson<CameraSetting>(camJson);
         }
     }

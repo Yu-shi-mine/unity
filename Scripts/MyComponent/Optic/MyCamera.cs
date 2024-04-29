@@ -20,6 +20,11 @@ namespace MyComponent.Optic
 
 
         // Inheritance
+        public void Initialize()
+        {
+            _camera = GetComponent<Camera>();
+        }
+
         public void LoadSetting<T>(T setting) where T : SettingBase
         {
             try
@@ -33,10 +38,6 @@ namespace MyComponent.Optic
                 Message.Send(ex.Message);
             }
         }
-
-
-        // Public Method
-        public void Initialize() => _camera = GetComponent<Camera>();
 
 
         // Private Method

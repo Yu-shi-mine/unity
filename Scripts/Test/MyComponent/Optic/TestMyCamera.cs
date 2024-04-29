@@ -4,6 +4,7 @@ using UnityEngine;
 
 using MyComponent.Optic;
 using Setting.Optic;
+using Utility.IO;
 
 namespace Test
 {
@@ -11,7 +12,7 @@ namespace Test
     {
         // Member
         private static string _fileName = "data.json";
-        private static string _camDrectory = "E:\\WORKSPACE\\UnityProjects\\MyTest\\AppData\\Setting\\Optic\\Camera";
+        private static string _camDirectory = "E:\\WORKSPACE\\UnityProjects\\MyTest\\AppData\\Setting\\Optic\\Camera";
         private static string _camName = "CaptureCamera";
 
 
@@ -20,12 +21,8 @@ namespace Test
         {
             MyCamera camera = GameObject.Find(_camName).GetComponent<MyCamera>();
 
-            string camPath = Path.Combine(_camDrectory, _fileName);
-            string camJson;
-            using (StreamReader sr = new StreamReader(camPath))
-            {
-                camJson = sr.ReadToEnd();
-            }
+            string camPath = Path.Combine(_camDirectory, _fileName);
+            string camJson = JsonIO.Load(camPath);
             CameraSetting cam = JsonUtility.FromJson<CameraSetting>(camJson);
             camera.LoadSetting(cam);
         }
